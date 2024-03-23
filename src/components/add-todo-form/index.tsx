@@ -1,15 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { addTodo } from "@/app/actions";
+import { clsx } from "clsx";
 
-export default function AddTodoForm() {
+type PropTypes = {
+  addTodo: (formData: FormData) => void;
+  disabled: boolean;
+};
+
+export default function AddTodoForm({ addTodo, disabled }: PropTypes) {
   const [value, setValue] = useState("");
 
   function handleSubmit(formData: FormData) {
-    if (formData.get("todo") === "") return;
+    if (formData.get("todo") === "" || disabled) return;
 
     setValue("");
+
     addTodo(formData);
   }
 
@@ -18,7 +24,10 @@ export default function AddTodoForm() {
       <input
         type="text"
         name="todo"
-        className="focus-visible:outline-brand/50 max-w-80 rounded border-slate-200 bg-slate-50 py-1 px-1.5"
+        className={clsx(
+          "focus-visible:outline-brand/50 max-w-80 rounded border-slate-200 bg-slate-50 py-1 px-1.5 font-light",
+          disabled && "text-slate-300",
+        )}
         style={{ flexGrow: 1 }}
         value={value}
         onChange={(e) => setValue(e.target.value)}

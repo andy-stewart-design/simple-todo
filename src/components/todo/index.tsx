@@ -1,21 +1,20 @@
 "use client";
 
-import { useState, useOptimistic, useTransition, startTransition } from "react";
-import { deleteTodo, updateTodo } from "@/app/actions";
-import { Todo } from "@/app/page";
+import { useOptimistic, startTransition } from "react";
+import { updateTodo } from "@/app/actions";
+import { TodoType } from "@/db/schema";
 
 type PropTypes = {
-  todo: Todo;
+  todo: TodoType;
+  deleteTodo: (id: string) => void;
 };
 
-export default function Todo({ todo }: PropTypes) {
+export default function Todo({ todo, deleteTodo }: PropTypes) {
   let [optimisticCompleted, setOptimsticCompleted] = useOptimistic(
-    Boolean(todo?.completed),
+    todo.completed,
   );
 
-  function handleChange() {
-    if (!todo) return null;
-
+  function updateCompleted() {
     const nextCompleted = !optimisticCompleted;
 
     startTransition(() => {
@@ -24,14 +23,12 @@ export default function Todo({ todo }: PropTypes) {
     });
   }
 
-  if (!todo) return null;
-
   return (
     <div className="flex gap-4 border-b border-gray-100 p-3 text-xl font-light">
       <input
         type="checkbox"
         checked={optimisticCompleted}
-        onChange={handleChange}
+        onChange={updateCompleted}
       />
       <h2
         className="user-select-none"
@@ -43,7 +40,7 @@ export default function Todo({ todo }: PropTypes) {
       >
         {todo.todo}
       </h2>
-      <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+      <button onClick={() => deleteTodo(todo.id)}>×</button>
     </div>
   );
 }
