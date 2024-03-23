@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: var(--color-green-400);
+  --color-brand: var(--color-blue-600);
 }
 
-html {
-  padding: var(--spacing-8);
+button {
+  cursor: pointer;
 }

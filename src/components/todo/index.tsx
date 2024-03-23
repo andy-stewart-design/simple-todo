@@ -10,7 +10,7 @@ type PropTypes = {
 
 export default function Todo({ todo }: PropTypes) {
   let [optimisticCompleted, setOptimsticCompleted] = useOptimistic(
-    Boolean(todo?.completed)
+    Boolean(todo?.completed),
   );
 
   function handleChange() {
@@ -27,20 +27,21 @@ export default function Todo({ todo }: PropTypes) {
   if (!todo) return null;
 
   return (
-    <div style={{ display: "flex", gap: "1rem" }}>
+    <div className="flex gap-4 border-b border-gray-100 p-3 text-xl font-light">
       <input
         type="checkbox"
         checked={optimisticCompleted}
         onChange={handleChange}
       />
       <h2
+        className="user-select-none"
         style={{
           textDecoration: optimisticCompleted ? "line-through" : "",
           opacity: optimisticCompleted ? 0.5 : 1,
-          userSelect: "none",
+          flexGrow: 1,
         }}
       >
-        {todo.todo} {`${optimisticCompleted}`}
+        {todo.todo}
       </h2>
       <button onClick={() => deleteTodo(todo.id)}>Delete</button>
     </div>
