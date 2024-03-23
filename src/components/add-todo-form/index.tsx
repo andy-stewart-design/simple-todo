@@ -7,15 +7,18 @@ export default function AddTodoForm() {
   const [value, setValue] = useState("");
 
   function handleSubmit(formData: FormData) {
+    if (formData.get("todo") === "") return;
+
     setValue("");
     addTodo(formData);
   }
 
   return (
-    <form action={handleSubmit}>
+    <form action={handleSubmit} className="flex gap-2">
       <input
         type="text"
         name="todo"
+        className="focus-visible:outline-brand/50 border-slate-200 bg-slate-50 py-1 px-1.5"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />

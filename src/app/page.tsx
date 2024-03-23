@@ -7,7 +7,6 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Simple Todos</h1>
       <AddTodoForm />
       <ul>
         {todos.map((todo) => (
