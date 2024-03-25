@@ -40,11 +40,10 @@ export default function Todo({ todo, deleteTodo }: PropTypes) {
       >
         {todo.todo}
       </h2>
-      <button
-        className="rotate-180 scale-0 opacity-0 transition-all delay-200 duration-300 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 group-hover:delay-75"
-        onClick={() => deleteTodo(todo.id)}
-      >
-        ×
+      <button onClick={() => deleteTodo(todo.id)}>
+        <span className="block rotate-180 scale-0 opacity-0 transition-all delay-200 duration-300 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 group-hover:delay-75">
+          ×
+        </span>
       </button>
     </div>
   );
