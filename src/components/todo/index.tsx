@@ -24,7 +24,7 @@ export default function Todo({ todo, deleteTodo }: PropTypes) {
   }
 
   return (
-    <div className="flex h-20 items-center gap-4 py-6 px-8 text-xl font-light">
+    <div className="group flex min-h-20 items-center gap-4 py-6 px-8 text-xl font-light">
       <input
         type="checkbox"
         checked={optimisticCompleted}
@@ -40,7 +40,12 @@ export default function Todo({ todo, deleteTodo }: PropTypes) {
       >
         {todo.todo}
       </h2>
-      <button onClick={() => deleteTodo(todo.id)}>×</button>
+      <button
+        className="rotate-180 scale-0 opacity-0 transition-all delay-200 duration-300 ease-out group-hover:rotate-0 group-hover:scale-100 group-hover:opacity-100 group-hover:delay-75"
+        onClick={() => deleteTodo(todo.id)}
+      >
+        ×
+      </button>
     </div>
   );
 }
