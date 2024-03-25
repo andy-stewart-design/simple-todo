@@ -24,7 +24,7 @@ export default function Todo({ todo, deleteTodo }: PropTypes) {
   }
 
   return (
-    <div className="flex gap-4 border-b border-gray-100 p-3 text-xl font-light">
+    <div className="flex h-20 items-center gap-4 py-6 px-8 text-xl font-light">
       <input
         type="checkbox"
         checked={optimisticCompleted}
